@@ -3,6 +3,8 @@ const env = require("dotenv");
 const  connectDB = require('./config/db.js');
 const cors = require("cors");
 const cookieParser = require("cookie-parser")
+const authRoute = require("./route/authRout.js")
+
 const app = express();
 env.config();
 connectDB();
@@ -23,8 +25,10 @@ app.use(cors({
 }))
 
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
+
+app.use("/api/auth",authRoute)
 app.get("/", (req,res) => {
     res.send("hello world")
 })
